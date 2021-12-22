@@ -5,12 +5,15 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
+../Core/Src/lib/5611bh.c \
 ../Core/Src/lib/led1.c 
 
 C_DEPS += \
+./Core/Src/lib/5611bh.d \
 ./Core/Src/lib/led1.d 
 
 OBJS += \
+./Core/Src/lib/5611bh.o \
 ./Core/Src/lib/led1.o 
 
 

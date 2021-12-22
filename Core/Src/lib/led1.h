@@ -1,9 +1,19 @@
 #ifndef __LED1_H
 #define __LED1_H
 
-void SHOW_LED(); // led亮
-void HIND_LED(); // led灭
+/**
+ * 点亮 LED
+ */
+void SHOW_LED();
 
-void LED_Init();// 初始化
+/**
+ * 灭 LED
+ */
+void HIND_LED();
+
+/**
+ * 初始化
+ */
+void LED_Init();
 
 #endif
