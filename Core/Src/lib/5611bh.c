@@ -12,6 +12,10 @@
 #include "stm32f1xx_hal.h"
 #include "main.h"
 
+#define RESET_INPUT HAL_GPIO_ReadPin(IN_RESET_GPIO_Port, IN_RESET_Pin)
+#define STOP_INPUT HAL_GPIO_ReadPin(IN_STOP_GPIO_Port, IN_STOP_Pin)
+#define KEY0_INPUT HAL_GPIO_ReadPin(IN_KEY0_GPIO_Port, IN_KEY0_Pin)
+
 //GPIO_TypeDef GPIO_LIST[8] = {BH_A_GPIO_Port, BH_B_GPIO_Port, BH_C_GPIO_Port, BH_D_GPIO_Port, BH_E_GPIO_Port, BH_F_GPIO_Port, BH_G_GPIO_Port, PH_DP_GPIO_Port};
 //
 //uint16_t PIN_LIST[8] = {BH_A_Pin, BH_B_Pin, BH_C_Pin, BH_D_Pin, BH_E_Pin, BH_F_Pin, BH_G_Pin, BH_DP_Pin};
@@ -78,17 +82,67 @@ void BH_RESET() {
 
 
 void GPIO_SetBits(int letter) {
+	if (letter >=10) {
+		letter = 0;
+	}
 	BH_RESET();
 	SHOW_GPIOS(NUMBERS[letter]);
 }
 int _time = 0;
+int _stop = 0;
+
 void BH_init() {
 	GPIO_SetBits(_time);
-	_time++;
-	if (_time >=10) {
-		_time=0;
-	}
+	if (_stop == 1) {
 
-	HAL_Delay(1000);
+	} else {
+		_time++;
+		if (_time >=10) {
+			_time=0;
+		}
+
+		HAL_Delay(1000);
+	}
 	BH_init();
+
+}
+
+void SET_top(int _instop) {
+	if(RESET_INPUT == GPIO_PIN_SET) {
+			HAL_Delay(5);
+		        if(RESET_INPUT == GPIO_PIN_SET)
+		        {
+		            while(RESET_INPUT == GPIO_PIN_SET);
+		            ADD_number(1);
+		        }
+		    }
+}
+
+int _reset_flag = 0;
+void SET_reset(int _reset) {
+	if (_reset_flag == 1 && _reset ==0) {
+//		_time = 0;
+		ADD_number(1);
+	}
+	_reset_flag = _reset;
+}
+
+void ADD_number(int _num) {
+	_time++;
+				if (_time >= 10) {
+					_time =0;
+				}
+		GPIO_SetBits(_time);
+}
+
+void SCAN_Keys() {
+//	GPIO_SetBits(RESET_INPUT);
+	if(RESET_INPUT == GPIO_PIN_SET) {
+		HAL_Delay(5);
+	        if(RESET_INPUT == GPIO_PIN_SET)
+	        {
+	            while(RESET_INPUT == GPIO_PIN_SET);
+	            ADD_number(1);
+	        }
+	    }
 }

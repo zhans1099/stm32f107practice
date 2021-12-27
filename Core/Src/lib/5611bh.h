@@ -37,4 +37,25 @@ void GPIO_SetBits(int letter);
  */
 void BH_init();
 
+/**
+ * 暂停/恢复
+ * @param {暂停/恢复} _stop
+ */
+void SET_top(int _instop);
+
+/**
+ * 重置数字
+ * @param {重置} _reset
+ */
+void SET_reset(int _inreset);
+
+/**
+ * 显示数字加
+ */
+void ADD_number(int _num);
+
+/**
+ * 按钮
+ */
+void SCAN_Keys();
 #endif

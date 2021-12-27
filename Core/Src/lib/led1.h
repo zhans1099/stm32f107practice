@@ -1,5 +1,5 @@
-#ifndef __LED1_H
-#define __LED1_H
+#ifndef _LED1_H
+#define _LED1_H
 
 /**
  * 点亮 LED
