@@ -108,23 +108,26 @@ void BH_init() {
 }
 
 void SET_top(int _instop) {
-	if(RESET_INPUT == GPIO_PIN_SET) {
+	if(STOP_INPUT == GPIO_PIN_SET) {
 			HAL_Delay(5);
-		        if(RESET_INPUT == GPIO_PIN_SET)
+		        if(STOP_INPUT == GPIO_PIN_SET)
 		        {
-		            while(RESET_INPUT == GPIO_PIN_SET);
-		            ADD_number(1);
+		            while(STOP_INPUT == GPIO_PIN_SET);
+		            ADD_number(2);
 		        }
 		    }
 }
 
 int _reset_flag = 0;
 void SET_reset(int _reset) {
-	if (_reset_flag == 1 && _reset ==0) {
-//		_time = 0;
-		ADD_number(1);
-	}
-	_reset_flag = _reset;
+	if(RESET_INPUT == GPIO_PIN_SET) {
+				HAL_Delay(5);
+			        if(RESET_INPUT == GPIO_PIN_SET)
+			        {
+			            while(RESET_INPUT == GPIO_PIN_SET);
+			            ADD_number(1);
+			        }
+			    }
 }
 
 void ADD_number(int _num) {
